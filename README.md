@@ -36,9 +36,6 @@ On each Ubuntu machine, open a terminal and run one of these commands:
     ```bash
     hostname -I
     ```
-    Here is how the Output should look like:
-
-    <!-- ![hostname -I command Execution](hostname.png) -->
     
     This prints one or more IP addresses. The address on your primary network interface (often the first one) is what you need.
     

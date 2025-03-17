@@ -1,23 +1,20 @@
 name: Convert README to PDF
-
 on:
   push:
     paths:
       - "README.md"
   workflow_dispatch:
-
 jobs:
   convert:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Dependencies (Pandoc & LaTeX)
+      - name: Install Dependencies (Pandoc, LaTeX, and SVG tools)
         run: |
           sudo apt update
-          sudo apt install -y pandoc texlive-xetex
+          sudo apt install -y pandoc texlive-xetex librsvg2-bin
 
       - name: Convert README.md to PDF
         run: |
