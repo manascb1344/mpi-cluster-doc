@@ -14,10 +14,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       
-      - name: Install Dependencies (Pandoc, LaTeX, and SVG tools)
+      - name: Install Dependencies (Pandoc, LaTeX, and fonts)
         run: |
           sudo apt update
-          sudo apt install -y pandoc texlive-xetex librsvg2-bin texlive-fonts-recommended
+          sudo apt install -y pandoc texlive-xetex librsvg2-bin texlive-fonts-recommended texlive-fonts-extra fonts-liberation
 
       - name: Convert README.md to PDF
         run: |
@@ -25,12 +25,12 @@ jobs:
             -o MPI_CLUSTER_DOC_manascb1344.pdf \
             --pdf-engine=xelatex \
             -V geometry:"margin=1in" \
-            -V mainfont="Arial" \
-            -V monofont="DejaVu Sans Mono" \
-            -V fontsize=13pt \
+            -V mainfont="Liberation Sans" \
+            -V monofont="Liberation Mono" \
+            -V fontsize=11pt \
             -V documentclass=article \
             --toc
-      
+
       - name: Commit and Push PDF
         run: |
           git config --global user.name "github-actions[bot]"
