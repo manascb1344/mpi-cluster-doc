@@ -4,6 +4,7 @@ on:
     paths:
       - "README.md"
   workflow_dispatch:
+
 jobs:
   convert:
     runs-on: ubuntu-latest
@@ -12,16 +13,24 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+      
       - name: Install Dependencies (Pandoc, LaTeX, and SVG tools)
         run: |
           sudo apt update
-          sudo apt install -y pandoc texlive-xetex librsvg2-bin
+          sudo apt install -y pandoc texlive-xetex librsvg2-bin texlive-fonts-recommended
 
       - name: Convert README.md to PDF
         run: |
-          pandoc README.md -o MPI_CLUSTER_DOC_manascb1344.pdf --pdf-engine=xelatex
-
+          pandoc README.md \
+            -o MPI_CLUSTER_DOC_manascb1344.pdf \
+            --pdf-engine=xelatex \
+            -V geometry:"margin=1in" \
+            -V mainfont="Arial" \
+            -V monofont="DejaVu Sans Mono" \
+            -V fontsize=13pt \
+            -V documentclass=article \
+            --toc
+      
       - name: Commit and Push PDF
         run: |
           git config --global user.name "github-actions[bot]"
